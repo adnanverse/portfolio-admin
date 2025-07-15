@@ -1,8 +1,7 @@
 import axios from '../../AxiosInstances/axiosInstance';
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select';
-
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { MdCancel } from "react-icons/md";
 import { IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
@@ -22,7 +21,7 @@ export default function AddProject() {
     const [paraInput, setParaInput] = useState('');
     const [paragraphs, setParagraphs] = useState([]);
     let [projectdetail, setprojectdetail] = useState('')
-
+    let navigation = useNavigate()
 
     useEffect(() => {
         if (params.id != undefined) {
@@ -47,6 +46,7 @@ export default function AddProject() {
 
                 } else {
                     toast.error(response.data.message)
+                    navigation('/')
                 }
             })
                 .catch((error) => {
@@ -71,6 +71,7 @@ export default function AddProject() {
                 settech(response.data.data)
                 }else{
                         toast.error(response.data.message)
+                         navigation('/')
                 }
 
 
@@ -167,8 +168,8 @@ export default function AddProject() {
                     toast.success(params.id ? "Project updated!" : "Project added!");
                 } else {
                     toast.error(response.data.message)
+                     navigation('/')
                 }
-                toast.success(params.id ? "Project updated!" : "Project added!");
             })
             .catch((error) => {
                 console.error("❌ Error:", error);
@@ -228,6 +229,7 @@ export default function AddProject() {
                             setrender(!render)
                         } else {
                             toast.error(response.data.message)
+                             navigation('/')
                         }
                     }).catch((error) => {
                         toast.error('hello', error.message)

@@ -1,6 +1,6 @@
 import axios from '../../AxiosInstances/axiosInstance';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 export default function AddSkills() {
@@ -8,6 +8,7 @@ export default function AddSkills() {
     let [skilldetail, setskilldetail] = useState('')
     let [render, setrender] = useState(true)
     let [BackendImage, setBackendImage] = useState('');
+    let navigation = useNavigate()
 
     let [SelectedImage, setSelectedImage] = useState('');
 
@@ -20,6 +21,7 @@ export default function AddSkills() {
                     setBackendImage(response.data.base_url + '/' + response.data.data.image);  // ✅ backend image set
                 } else {
                     toast.error('something went wrong !!');
+                    navigation('/')
                 }
             }).catch((error) => {
                 toast.error(error.message);
@@ -43,6 +45,7 @@ export default function AddSkills() {
 
                 } else {
                     toast.error('something went wrong !!')
+                    navigation('/')
 
                 }
 
@@ -57,6 +60,7 @@ export default function AddSkills() {
 
                 } else {
                     toast.error('something went wrong !!!!')
+                    navigation('/')
 
                 }
 

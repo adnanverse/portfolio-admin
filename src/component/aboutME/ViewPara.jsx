@@ -1,6 +1,6 @@
 import axios from '../../AxiosInstances/axiosInstance';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
@@ -8,7 +8,7 @@ export default function ViewPara() {
   let [checkedvalue, setcheckedvalue] = useState([]);
   let [render, setrender] = useState(true)
   let [para, setpara] = useState([])
-
+   let navigation = useNavigate()
 
   useEffect(() => {
     axios.post('api/admin/about-me/view')
@@ -17,6 +17,7 @@ export default function ViewPara() {
           setpara(response.data.data)
         } else {
           toast.error(response.data.message)
+          navigation('/')
         }
       }).catch((error) => {
         console.log(error.message)
@@ -32,6 +33,7 @@ export default function ViewPara() {
           setrender(!render)
         } else {
           toast.error(response.data.message)
+          navigation('/')
         }
       }).catch((error) => {
         toast.error(error.message)
@@ -60,6 +62,7 @@ export default function ViewPara() {
               setrender(!render);
             } else {
               toast.error(response.data.message);
+               navigation('/')
             }
           })
           .catch((error) => {

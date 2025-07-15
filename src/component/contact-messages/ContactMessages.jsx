@@ -5,10 +5,12 @@ import Swal from 'sweetalert2'
 import { IoIosArrowUp } from "react-icons/io";
 import { toast } from 'react-toastify';
 import axios from '../../AxiosInstances/axiosInstance';
+import { useNavigate } from 'react-router-dom';
 export default function ContactMessages() {
     let [blockid, setblockid] = useState('')
     let [checkedvalue, setcheckedvalue] = useState([])
-
+    
+   let navigation = useNavigate()
     let { messages, setrender, render } = useContext(CommonContext)
     let changestatushandler = () => {
         axios.post('api/admin/contact-me/change-status', { id: checkedvalue }).then((response) => {
@@ -18,7 +20,7 @@ export default function ContactMessages() {
                 setcheckedvalue([])
             } else {
                 toast.error('something went wrong !!')
-
+                navigation('/')
             }
 
 
@@ -47,6 +49,7 @@ export default function ContactMessages() {
                             setrender(!render);
                         } else {
                             toast.error('Something went wrong!');
+                             navigation('/')
                         }
                     })
                     .catch((error) => {
@@ -78,7 +81,6 @@ export default function ContactMessages() {
 
     }
 
-    console.log(checkedvalue)
     return (
         <>
             <nav class="flex border-b-2" aria-label="Breadcrumb">

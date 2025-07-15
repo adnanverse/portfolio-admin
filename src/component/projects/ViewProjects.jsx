@@ -1,7 +1,7 @@
 import axios from '../../AxiosInstances/axiosInstance';
 import React, { useEffect, useState } from 'react'
 import { TbListDetails } from 'react-icons/tb';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
@@ -12,7 +12,7 @@ export default function ViewProjects() {
     let [baseurl, setbaseurl] = useState('')
     let [DetailPopUp, setdetailpopup] = useState(false)
     let [projectdetail, setprojectdetail] = useState('')
-
+    let navigation = useNavigate()
 
     useEffect(() => {
         axios.post('api/admin/project/view',)
@@ -24,6 +24,7 @@ export default function ViewProjects() {
 
                 }else{
                     toast.error(response.data.message)
+                    navigation('/')
                 }
               
 
@@ -39,6 +40,7 @@ export default function ViewProjects() {
                     setprojectdetail(response.data.data)
                 } else {
                     toast.error(response.data.message)
+                    navigation('/')
                 }
             })
             .catch((error) => {
@@ -58,6 +60,7 @@ export default function ViewProjects() {
           setrender(!render)
         } else {
           toast.error(response.data.message)
+          navigation('/')
         }
       }).catch((error) => {
         toast.error(error.message)
@@ -87,6 +90,7 @@ export default function ViewProjects() {
               setrender(!render);
             } else {
               toast.error(response.data.message);
+              navigation('/')
             }
           })
           .catch((error) => {

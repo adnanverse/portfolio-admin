@@ -1,6 +1,6 @@
 import axios from '../../AxiosInstances/axiosInstance';
 import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import Swal from 'sweetalert2'
 export default function ViewSkills() {
@@ -8,6 +8,8 @@ export default function ViewSkills() {
   let [render, setrender] = useState(true)
   let [skillData, setskillsData] = useState([]);
   let [baseurl, setbaseurl] = useState('')
+
+    let navigation = useNavigate()  
 
 
   useEffect(() => {
@@ -18,6 +20,7 @@ export default function ViewSkills() {
           setbaseurl(response.data.base_url)
         } else {
           toast.error(response.data.message)
+          navigation('/')
         }
 
     }).catch((error) => {
@@ -45,6 +48,7 @@ export default function ViewSkills() {
               setrender(!render);
             } else {
               toast.error(response.data.message);
+              navigation('/')
             }
           })
           .catch((error) => {
@@ -66,6 +70,7 @@ export default function ViewSkills() {
         } else {
           toast.error(response.data.message
           )
+          navigation('/')
         }
       }).catch((error) => {
         toast.error(error.message)

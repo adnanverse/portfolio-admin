@@ -1,13 +1,13 @@
 import axios from '../../AxiosInstances/axiosInstance';
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify';
 
 export default function AddPara() {
   let params = useParams();
   let [Aboutdetail, setAboutdetail] = useState('')
   let [render, setrender] = useState(true)
-
+  let navigation = useNavigate()
 
   useEffect(() => {
     if (params.id != undefined) {
@@ -17,6 +17,7 @@ export default function AddPara() {
           setAboutdetail(response.data.data);
         } else {
           toast.error(response.data.message);
+          navigation('/')
         }
       }).catch((error) => {
         toast.error(error.message);
@@ -30,14 +31,14 @@ export default function AddPara() {
   let formhandler = (event) => {
     event.preventDefault();
     if (params.id != undefined) {
-      axios.put(`api/admin/about-me/update/${params.id}`, event.target ).then((response) => {
+      axios.put(`api/admin/about-me/update/${params.id}`, event.target).then((response) => {
         if (response.data.status === true) {
           toast.success('about  updated successfully ')
           setrender(!render)
 
         } else {
           toast.error(response.data.message)
-
+          navigation('/')
         }
 
 
@@ -46,12 +47,13 @@ export default function AddPara() {
       })
     } else {
       axios.post('api/admin/about-me/add', event.target).then((response) => {
-        if (response.data.status == true) {
+        if (response.data.status === true) {
           toast.success('about inserted   successfully ')
           event.target.reset();
 
         } else {
           toast.error(response.data.message)
+           navigation('/')
 
         }
 
