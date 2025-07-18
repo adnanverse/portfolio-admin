@@ -7,6 +7,7 @@ let CommonContext = createContext();
 export default function Context({ children }) {
     let [messages, setmessages] = useState([])
     let [islogin, setislogin] = useState(false)
+    let [render,setrender]=useState(true)
     let [count, setcount] = useState(0)
     useEffect(() => {
         axios.post('api/admin/contact-me/view').then((response) => {
@@ -25,10 +26,10 @@ export default function Context({ children }) {
         })
 
 
-    }, [])
+    }, [render])
 
 
-    let allItems = { messages, count, setislogin }
+    let allItems = { messages, count, setislogin,render,setrender }
     return (
         <div>
             <CommonContext.Provider value={allItems}>

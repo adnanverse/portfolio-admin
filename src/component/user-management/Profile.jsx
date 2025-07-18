@@ -2,7 +2,7 @@ import axios from '../../AxiosInstances/axiosInstance';
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import { CommonContext } from '../context\'/Context';
+import { CommonContext } from '../context/Context.jsx';
 
 export default function Profile() {
   let{render, setrender}=useContext(CommonContext)
@@ -18,6 +18,7 @@ export default function Profile() {
 		axios.post('api/admin/profile/detail')
 			.then((response) => {
         if(response.data.status===true){
+          console.log('this is base url ',response.data.base_url)
           setbaseurl(response.data.base_url)
 				setuserdetails(response.data.data)
         }else{
@@ -114,6 +115,7 @@ export default function Profile() {
             <div className="w-90 h-[400px] border rounded-lg overflow-hidden shadow">
               {SelectedResume || userdetails.resume ? (
                 <iframe
+                allow="fullscreen"
                   src={
                     SelectedResume
                       ? SelectedResume
@@ -152,6 +154,7 @@ export default function Profile() {
               Name
             </label>
             <input
+            autoComplete='off'
               type="text"
               name="name"
               defaultValue={userdetails.name}
@@ -167,6 +170,7 @@ export default function Profile() {
               Email
             </label>
             <input
+            autoComplete='off'
               type="email"
               name="email"
               defaultValue={userdetails.email}
@@ -182,6 +186,7 @@ export default function Profile() {
               Domain
             </label>
             <input
+            autoComplete='off'
               type="text"
               name="position"
               defaultValue={userdetails.position}
@@ -200,6 +205,7 @@ export default function Profile() {
               name="bio"
               id="bio"
               rows="5"
+              autoComplete='off'
               defaultValue={userdetails.bio}
               placeholder="Write about yourself"
               className="w-full px-4 py-2 border rounded-md focus:ring-purple-500 focus:border-purple-500"

@@ -11,12 +11,12 @@ import ViewSkills from './component/skills/ViewSkills.jsx'
 import AddSocial from './component/Social/AddSocial.jsx'
 import ViewSocial from './component/Social/ViewSocial.jsx'
 import ContactMessages from './component/contact-messages/ContactMessages.jsx'
-import Context from './component/context\'/Context.jsx'
 import AddPara from './component/aboutME/AddPara.jsx'
 import ViewPara from './component/aboutME/ViewPara.jsx'
 import AdminCredentials from './component/user-management/AdminCredentials.jsx'
 import AddProject from './component/projects/AddProject.jsx'
 import ViewProjects from './component/projects/ViewProjects.jsx'
+import Context from './component/context/Context.jsx'
 createRoot(document.getElementById('root')).render(
   <>
     <Context>

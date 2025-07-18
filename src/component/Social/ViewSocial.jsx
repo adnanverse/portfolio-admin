@@ -140,14 +140,14 @@ export default function ViewSocial() {
   }
   return (
     <>
-      <nav class="flex border-b-2" aria-label="Breadcrumb">
-        <ol class="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-          <li class="inline-flex items-center"><a href="#" class="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
+      <nav className="flex border-b-2" aria-label="Breadcrumb">
+        <ol className="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li className="inline-flex items-center"><a href="#" className="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
           <li>
-            <div class="flex items-center">/<a href="#" class="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Profiles</a></div>
+            <div className="flex items-center">/<a href="#" className="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Profiles</a></div>
           </li>
           <li aria-current="page">
-            <div class="flex items-center">/<span class="ms-1 text-md font-medium text-gray-500 md:ms-2">
+            <div className="flex items-center">/<span className="ms-1 text-md font-medium text-gray-500 md:ms-2">
               view
             </span></div>
           </li>
@@ -155,11 +155,11 @@ export default function ViewSocial() {
       </nav>
       <div className="w-[95%] border mt-7  border-slate-400 rounded-t-md  mx-auto">
         <div className=' bg-slate-100 flex justify-between py-3 px-4 rounded-t-md border border-slate-400'>
-          <h3 class="text-[26px] font-semibold  bg-slate-100 rounded-t-md ">
+          <h3 className="text-[26px] font-semibold  bg-slate-100 rounded-t-md ">
             View Profiles </h3>
           <div>
-            <button onClick={changestatushandler} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">change status</button>
-            <button onClick={deleteHandler} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">delete all </button>
+            <button onClick={changestatushandler} type="button" className="text-white capitalize bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">change status</button>
+            <button onClick={deleteHandler} type="button" className="text-white capitalize bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">delete all </button>
           </div>
         </div>
 
@@ -192,7 +192,7 @@ export default function ViewSocial() {
               {
                 profiles.map((v, i) => {
                   return (
-                    <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    <tr key={i} className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                       <td className="w-4 p-4">
                         <div className="flex items-center">
                           <input

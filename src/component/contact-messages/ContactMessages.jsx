@@ -1,16 +1,16 @@
 import React, { useContext, useState } from 'react'
-import { CommonContext } from '../context\'/Context'
 import { IoIosArrowDown } from "react-icons/io";
 import Swal from 'sweetalert2'
 import { IoIosArrowUp } from "react-icons/io";
 import { toast } from 'react-toastify';
 import axios from '../../AxiosInstances/axiosInstance';
 import { useNavigate } from 'react-router-dom';
+import { CommonContext } from '../context/Context';
 export default function ContactMessages() {
     let [blockid, setblockid] = useState('')
     let [checkedvalue, setcheckedvalue] = useState([])
-    
-   let navigation = useNavigate()
+
+    let navigation = useNavigate()
     let { messages, setrender, render } = useContext(CommonContext)
     let changestatushandler = () => {
         axios.post('api/admin/contact-me/change-status', { id: checkedvalue }).then((response) => {
@@ -49,7 +49,7 @@ export default function ContactMessages() {
                             setrender(!render);
                         } else {
                             toast.error('Something went wrong!');
-                             navigation('/')
+                            navigation('/')
                         }
                     })
                     .catch((error) => {
@@ -83,22 +83,22 @@ export default function ContactMessages() {
 
     return (
         <>
-            <nav class="flex border-b-2" aria-label="Breadcrumb">
-                <ol class="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li class="inline-flex items-center"><a href="#" class="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
+            <nav className="flex border-b-2" aria-label="Breadcrumb">
+                <ol className="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li className="inline-flex items-center"><a href="#" className="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
                     <li>
-                        <div class="flex items-center">/<a href="#" class="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Contact Messages</a></div>
+                        <div className="flex items-center">/<a href="#" className="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Contact Messages</a></div>
                     </li>
 
                 </ol>
             </nav>
             <div className="w-[95%] border mt-9 border-slate-400 rounded-t-md  mx-auto">
                 <div className=' bg-slate-100 flex justify-between py-3 px-4 rounded-t-md border border-slate-400'>
-                    <h3 class="text-[26px] font-semibold  bg-slate-100 rounded-t-md ">
+                    <h3 className="text-[26px] font-semibold  bg-slate-100 rounded-t-md ">
                         Contact Messages</h3>
                     <div>
-                        <button onClick={changestatushandler} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">change status</button>
-                        <button onClick={deleteHandler} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">delete all </button>
+                        <button onClick={changestatushandler} type="button" className="text-white capitalize bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">change status</button>
+                        <button onClick={deleteHandler} type="button" className="text-white capitalize bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">delete all </button>
                     </div>
                 </div>
 
@@ -107,17 +107,17 @@ export default function ContactMessages() {
                     {
                         messages.map((v, i) => {
                             return (
-                                <>
-                                    <div className='flex  items-center   '>
+                                <div key={i}>
+                                    <div className='flex  items-center ' >
 
 
 
                                         <div className='  px-2 basis-[2%]'>
-                                            <input className='' onChange={checkData} id={v._id} type="checkbox" />
+                                            <input className='' onChange={checkData} id={v._id} type="checkbox" checked={checkedvalue.includes(v._id)} />
                                         </div>
                                         <h2 id="accordion-flush-heading-1 " onClick={() => openAccordian(v._id)} className='basis-[98%]  px-2'>
-                                            <button type="button" class="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
-                                                <span>{v.name}</span>
+                                            <button type="button" className="flex items-center justify-between w-full py-5 font-medium rtl:text-right text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400 gap-3" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+                                                <span className='capitalize'>{v.name}</span>
                                                 <span className="text-[12px] text-gray-400">
                                                     {new Date(v.createdAt).toLocaleString('en-IN', {
                                                         day: '2-digit',
@@ -145,15 +145,34 @@ export default function ContactMessages() {
                                         </h2>
                                     </div>
 
-                                    <div id="accordion-flush-body-1" className={`${(blockid == v._id) ? ' ' : 'hidden'} px-8`} aria-labelledby="accordion-flush-heading-1">
-                                        <div class="py-5 border-b border-gray-200 dark:border-gray-700">
-                                            <p class="mb-2 text-gray-500 dark:text-gray-400">{v.email}</p>
-                                            <p class="text-gray-500 dark:text-gray-400">{v.subject}</p>
-                                            <p class="text-gray-500 dark:text-gray-400">{v.message}</p>
+                                    <div id="accordion-flush-body-1" className={`${(blockid == v._id) ? '' : 'hidden'} px-8`} aria-labelledby="accordion-flush-heading-1">
+                                        <div className="py-5 border-b border-gray-200 dark:border-gray-700 space-y-2">
+
+                                            {/* Email */}
+                                            <div className="flex">
+                                                <span className="w-[100px] min-w-[100px] text-gray-700 font-medium">Email:</span>
+                                                <span className="text-gray-500 break-words">{v.email}</span>
+                                            </div>
+
+                                            {/* Subject */}
+                                            <div className="flex">
+                                                <span className="w-[100px] min-w-[100px] text-gray-700 font-medium">Subject:</span>
+                                                <span className="text-gray-500 break-words">{v.subject}</span>
+                                            </div>
+
+                                            {/* Message */}
+                                            <div className="flex">
+                                                <span className="w-[100px] min-w-[100px] text-gray-700 font-medium">Message:</span>
+                                                <span className="text-gray-500 break-words whitespace-pre-line">{v.message}</span>
+                                            </div>
+
                                         </div>
                                     </div>
 
-                                </>
+
+
+
+                                </div>
                             )
                         })
                     }

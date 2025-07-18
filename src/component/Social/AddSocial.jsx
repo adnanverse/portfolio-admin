@@ -113,14 +113,14 @@ export default function AddSocial() {
   }
   return (
     <section className="w-full">
-      <nav class="flex border-b-2" aria-label="Breadcrumb">
-        <ol class="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-          <li class="inline-flex items-center"><a href="#" class="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
+      <nav className="flex border-b-2" aria-label="Breadcrumb">
+        <ol className="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+          <li className="inline-flex items-center"><a href="#" className="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
           <li>
-            <div class="flex items-center">/<a href="#" class="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Profiles</a></div>
+            <div className="flex items-center">/<a href="#" className="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Profiles</a></div>
           </li>
           <li aria-current="page">
-            <div class="flex items-center">/<span class="ms-1 capitalize text-md font-medium text-gray-500 md:ms-2">
+            <div className="flex items-center">/<span className="ms-1 capitalize text-md font-medium text-gray-500 md:ms-2">
              { (params.id!=undefined)?'update':'Add'}
        
             </span></div>
@@ -133,14 +133,15 @@ export default function AddSocial() {
         </h3>
 
         <form onSubmit={formhandler} className="border p-3 rounded-b-md border-slate-400">
-          <div class="mb-5">
-            <label for="base-input" class="block mb-5 	text-base font-medium text-gray-900">Name</label>
+          <div className="mb-5">
+            <label htmlFor="base-input" className="block mb-5 	text-base font-medium text-gray-900">Name</label>
             <input
               name="name"
+              autoComplete='off'
               type="text"
               defaultValue={socialdetail.name}
               id="base-input"
-              class="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
+              className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
               placeholder="Enter your name"
             />
           </div>
@@ -149,6 +150,7 @@ export default function AddSocial() {
             <div className="flex items-center gap-4">
               <input
                 name="icon"
+                autoComplete='off'
                 type="text"
                 defaultValue={socialdetail.icon}
                 onChange={handleIconChange}
@@ -161,25 +163,27 @@ export default function AddSocial() {
               </div>
             </div>
           </div>
-          <div class="mb-5">
-            <label for="base-input" class="block mb-5 	text-base font-medium text-gray-900">URL</label>
+          <div className="mb-5">
+            <label htmlFor="base-input" className="block mb-5 	text-base font-medium text-gray-900">URL</label>
             <input
               name="url"
+              autoComplete='off'
               type="text"
               defaultValue={socialdetail.url}
               id="base-input"
-              class="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
+              className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
               placeholder="Enter your name"
             />
           </div>
-          <div class="mb-5">
-            <label for="base-input" class="block mb-5 	text-base font-medium text-gray-900">Order</label>
+          <div className="mb-5">
+            <label htmlFor="base-input" className="block mb-5 	text-base font-medium text-gray-900">Order</label>
             <input
               name="order"
               type="text"
+              autoComplete='off'
               defaultValue={socialdetail.order}
               id="base-input"
-              class="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
+              className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
               placeholder="Enter your name"
             />
           </div>

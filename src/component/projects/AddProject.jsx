@@ -1,7 +1,7 @@
 import axios from '../../AxiosInstances/axiosInstance';
 import React, { useEffect, useState } from 'react'
 import Select from 'react-select';
-import { useNavigate, useParams } from 'react-router-dom';
+import { data, useNavigate, useParams } from 'react-router-dom';
 import { MdCancel } from "react-icons/md";
 import { IoClose } from 'react-icons/io5';
 import { toast } from 'react-toastify';
@@ -11,6 +11,7 @@ export default function AddProject() {
     let params = useParams();
     let [render, setrender] = useState(false)
     let [tech, settech] = useState([]);
+    const [typeState, setTypeState] = useState('');
     let [selectedTech, setselectedTech] = useState([])
     const [featureInput, setFeatureInput] = useState('');
     const [features, setFeatures] = useState([]);
@@ -30,7 +31,7 @@ export default function AddProject() {
                     setprojectdetail(response.data.data)
                     setbaseurl(response.data.base_url)
                     setFeatures(response.data.data.features)
-
+                    setTypeState(response.data.data.project_type)
                     setParagraphs(response.data.data.paragraphs)
                     setselectedTech((response.data.data.tech_stack.length > 0) ?
                         response.data.data.tech_stack.map((v, i) => {
@@ -54,6 +55,7 @@ export default function AddProject() {
                 })
         } else {
             setprojectdetail('')
+            setTypeState('')
             setBlocks([
                 { image: null, backendImage: null, order: "" }
             ])
@@ -66,12 +68,12 @@ export default function AddProject() {
     useEffect(() => {
         axios.post('api/admin/skills/view', {})
             .then((response) => {
-                if(response.data.status===true){
-                    
-                settech(response.data.data)
-                }else{
-                        toast.error(response.data.message)
-                         navigation('/')
+                if (response.data.status === true) {
+
+                    settech(response.data.data)
+                } else {
+                    toast.error(response.data.message)
+                    navigation('/')
                 }
 
 
@@ -168,7 +170,7 @@ export default function AddProject() {
                     toast.success(params.id ? "Project updated!" : "Project added!");
                 } else {
                     toast.error(response.data.message)
-                     navigation('/')
+                    navigation('/')
                 }
             })
             .catch((error) => {
@@ -229,7 +231,7 @@ export default function AddProject() {
                             setrender(!render)
                         } else {
                             toast.error(response.data.message)
-                             navigation('/')
+                            navigation('/')
                         }
                     }).catch((error) => {
                         toast.error('hello', error.message)
@@ -250,15 +252,15 @@ export default function AddProject() {
 
 
     return (
-        <section class="w-full">
-            <nav class="flex border-b-2" aria-label="Breadcrumb">
-                <ol class="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li class="inline-flex items-center"><a href="#" class="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
+        <section className="w-full">
+            <nav className="flex border-b-2" aria-label="Breadcrumb">
+                <ol className="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li className="inline-flex items-center"><a href="#" className="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
                     <li>
-                        <div class="flex items-center">/<a href="#" class="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2"></a>Project</div>
+                        <div className="flex items-center">/<a href="#" className="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2"></a>Project</div>
                     </li>
                     <li aria-current="page">
-                        <div class="flex items-center">/<span class="ms-1 text-md font-medium text-gray-500 md:ms-2">
+                        <div className="flex items-center">/<span className="ms-1 text-md font-medium text-gray-500 md:ms-2">
                             {
                                 (params.id != null)
                                     ?
@@ -271,9 +273,9 @@ export default function AddProject() {
                     </li>
                 </ol>
             </nav>
-            <div class="w-full min-h-[610px]">
-                <div class="max-w-[1220px] mx-auto py-5">
-                    <h3 class="text-[26px] font-semibold bg-slate-100 py-3 px-4 rounded-t-md border border-slate-400">
+            <div className="w-full min-h-[610px]">
+                <div className="max-w-[1220px] mx-auto py-5">
+                    <h3 className="text-[26px] font-semibold bg-slate-100 py-3 px-4 rounded-t-md border border-slate-400">
                         {
                             (params.id != null)
                                 ?
@@ -283,60 +285,58 @@ export default function AddProject() {
                         } </h3>
                     <form
                         onSubmit={formhandler}
-                        class="border   justify-between border-t-0 p-3 rounded-b-md border-slate-400">
-                        <div class="mb-5">
-                            <label for="base-input" class="block mb-5 	text-base font-medium text-gray-900">Name</label>
+                        className="border   justify-between border-t-0 p-3 rounded-b-md border-slate-400">
+                        <div className="mb-5">
+                            <label htmlFor="base-input" className="block mb-5 	text-base font-medium text-gray-900">Name</label>
                             <input
                                 name="name"
                                 type="text"
+                                autoComplete='off'
                                 defaultValue={projectdetail.name}
                                 id="base-input"
-                                class="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
+                                className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
                                 placeholder="Enter your name"
                             />
                         </div>
 
                         <div className='flex  gap-5'>
-                            <div class="mb-5 basis-[50%]">
-                                <label for="base-input" class="block mb-5 	text-base font-medium text-gray-900">Project Link</label>
+                            <div className="mb-5 basis-[50%]">
+                                <label htmlFor="base-input" className="block mb-5 	text-base font-medium text-gray-900">Project Link</label>
                                 <input
                                     name="link"
                                     type="text"
+                                    autoComplete='off'
                                     defaultValue={projectdetail.link}
                                     id="base-input"
-                                    class="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
+                                    className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
                                     placeholder="Enter your name"
                                 />
                             </div>
-                            <div class="mb-5 basis-[50%]">
-                                <label for="base-input" class="block mb-5 	text-base font-medium text-gray-900">Github Link</label>
+                            <div className="mb-5 basis-[50%]">
+                                <label htmlFor="base-input" className="block mb-5 	text-base font-medium text-gray-900">Github Link</label>
                                 <input
                                     name="github_link"
                                     type="text"
+                                    autoComplete='off'
                                     defaultValue={projectdetail.github_link}
                                     id="base-input"
-                                    class="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
+                                    className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
                                     placeholder="Enter your name"
                                 />
                             </div>
                         </div>
                         <div className='flex  gap-5'>
-                            <div class="mb-5 basis-[50%]">
-                                <label for="base-input" class="block mb-5 text-md font-medium text-gray-900">Select Project Type</label>
-                                <select id="default" name="project_type" class="border-2 border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
+                            <div className="mb-5 basis-[50%]">
+                                <label htmlFor="base-input" className="block mb-5 text-md font-medium text-gray-900">Select Project Type</label>
+                                <select id="default" value={typeState}
+                                    onChange={(e) => setTypeState(e.target.value)} name="project_type" className="border-2 border-gray-300 text-gray-900 mb-6 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-3">
                                     <option value={''}>--Select Project Type--</option>
-                                    <option selected={
-                                        (projectdetail.project_type === 'frontend')
-                                            ? 'selected' : ''
-                                    } value={'frontend'}>Frontend</option>
-                                    <option selected={
-                                        (projectdetail.project_type === 'fullstack')
-                                            ? 'selected' : ''
-                                    } value={'fullstack'}> Full stack</option>
+                                    <option value={'frontend'}>Frontend</option>
+                                    <option value={'fullstack'}> Full stack</option>
                                 </select>
                             </div>
-                            <div class="mb-5 basis-[50%]">
-                                <label class="block mb-5 text-md font-medium text-gray-900"> Select Technologies</label>
+                            <div className="mb-5 basis-[50%]">
+                                <label className="block mb-5 text-md font-medium text-gray-900"> Select Technologies</label>
 
                                 <Select options={Tech}
                                     onChange={techhandle}
@@ -353,6 +353,7 @@ export default function AddProject() {
                             <textarea
                                 name="short_description"
                                 id="base-input"
+                                autoComplete='off'
                                 defaultValue={projectdetail.short_description}
                                 className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
                                 placeholder="Enter a short description"
@@ -366,6 +367,7 @@ export default function AddProject() {
                             <textarea
                                 name="long_description"
                                 id="base-input"
+                                autoComplete='off'
                                 defaultValue={projectdetail.long_description}
                                 className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
                                 placeholder="Enter a short description"
@@ -460,6 +462,7 @@ export default function AddProject() {
                                 <input
                                     id="feature-input"
                                     type="text"
+                                    autoComplete='off'
                                     value={featureInput}
                                     onChange={(e) => setFeatureInput(e.target.value)}
                                     className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3 mb-3"
@@ -504,6 +507,7 @@ export default function AddProject() {
                             </label>
                             <textarea
                                 id="para-input"
+                                autoComplete='off'
                                 name="paragraph"
                                 value={paraInput}
                                 onChange={(e) => setParaInput(e.target.value)}
@@ -543,14 +547,15 @@ export default function AddProject() {
                         </div>
 
 
-                        <div class="mb-5">
-                            <label for="base-input" class="block mb-5 	text-base font-medium text-gray-900">Order</label>
+                        <div className="mb-5">
+                            <label htmlFor="base-input" className="block mb-5 	text-base font-medium text-gray-900">Order</label>
                             <input
                                 name="order"
+                                autoComplete='off'
                                 type="text"
                                 defaultValue={projectdetail.order}
                                 id="base-input"
-                                class="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
+                                className="text-base border-2 shadow-sm border-gray-300 text-gray-900 rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full py-2.5 px-3"
                                 placeholder="Enter your name"
                             />
                         </div>
@@ -559,7 +564,7 @@ export default function AddProject() {
 
                         <button
                             type="submit"
-                            class="focus:outline-none my-10 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+                            className="focus:outline-none my-10 text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mb-2 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
                         >
                             Submit
                         </button>

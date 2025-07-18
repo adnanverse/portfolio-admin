@@ -17,16 +17,16 @@ export default function ViewProjects() {
     useEffect(() => {
         axios.post('api/admin/project/view',)
             .then((response) => {
-                if(response.data.status===true){
-                      setProjectData(response.data.data)
+                if (response.data.status === true) {
+                    setProjectData(response.data.data)
 
-                setbaseurl(response.data.base_url)
+                    setbaseurl(response.data.base_url)
 
-                }else{
+                } else {
                     toast.error(response.data.message)
                     navigation('/')
                 }
-              
+
 
             }).catch((error) => {
                 console.log(error.message)
@@ -36,13 +36,13 @@ export default function ViewProjects() {
 
     let GetProjectId = (id) => {
         axios.post(`api/admin/project/detail`, { id: id }).then((response) => {
-                if (response.data.tokenstatus != false) {
-                    setprojectdetail(response.data.data)
-                } else {
-                    toast.error(response.data.message)
-                    navigation('/')
-                }
-            })
+            if (response.data.tokenstatus != false) {
+                setprojectdetail(response.data.data)
+            } else {
+                toast.error(response.data.message)
+                navigation('/')
+            }
+        })
             .catch((error) => {
                 toast.error(error.data.message)
                 console.log(error)
@@ -51,56 +51,56 @@ export default function ViewProjects() {
         setdetailpopup(true)
     }
 
- let changestatushandler = () => {
-    axios.post('api/admin/project/change-status', { id: checkedvalue })
-      .then((response) => {
-        if (response.data.status === true) {
-          toast.success('staatus updated !!!')
-          setcheckedvalue([])
-          setrender(!render)
-        } else {
-          toast.error(response.data.message)
-          navigation('/')
-        }
-      }).catch((error) => {
-        toast.error(error.message)
-      })
+    let changestatushandler = () => {
+        axios.post('api/admin/project/change-status', { id: checkedvalue })
+            .then((response) => {
+                if (response.data.status === true) {
+                    toast.success('staatus updated !!!')
+                    setcheckedvalue([])
+                    setrender(!render)
+                } else {
+                    toast.error(response.data.message)
+                    navigation('/')
+                }
+            }).catch((error) => {
+                toast.error(error.message)
+            })
 
-  }
-  
-  const deleteHandler = () => {
-    Swal.fire({
-      title: 'Are you sure?',
-      text: 'You want to delete these records? (They will be permanently deleted)',
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#3085d6',
-      confirmButtonText: 'Yes, delete',
-      cancelButtonText: 'Cancel',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        axios.post('api/admin/project/delete',
-          { id: checkedvalue }
-        )
-          .then((response) => {
-            if (response.data.status === true) {
-              toast.success('Status updated!');
-              setcheckedvalue([]);
-              setrender(!render);
+    }
+
+    const deleteHandler = () => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: 'You want to delete these records? (They will be permanently deleted)',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Yes, delete',
+            cancelButtonText: 'Cancel',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('api/admin/project/delete',
+                    { id: checkedvalue }
+                )
+                    .then((response) => {
+                        if (response.data.status === true) {
+                            toast.success('Status updated!');
+                            setcheckedvalue([]);
+                            setrender(!render);
+                        } else {
+                            toast.error(response.data.message);
+                            navigation('/')
+                        }
+                    })
+                    .catch((error) => {
+                        toast.error(error.message);
+                    });
             } else {
-              toast.error(response.data.message);
-              navigation('/')
+                toast.info("Deletion cancelled");
             }
-          })
-          .catch((error) => {
-            toast.error(error.message);
-          });
-      } else {
-        toast.info("Deletion cancelled");
-      }
-    });
-  }
+        });
+    }
     let selectallhandle = (event) => {
         if (event.target.checked == true) {
             let data = [];
@@ -129,14 +129,14 @@ export default function ViewProjects() {
     return (
         <>
             <DetailPopUpComp DetailPopUp={DetailPopUp} project={projectdetail} setdetailpopup={setdetailpopup} baseurl={baseurl} />
-            <nav class="flex border-b-2" aria-label="Breadcrumb">
-                <ol class="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
-                    <li class="inline-flex items-center"><a href="#" class="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
+            <nav className="flex border-b-2" aria-label="Breadcrumb">
+                <ol className="p-3 px-6 inline-flex items-center space-x-1 md:space-x-2 rtl:space-x-reverse">
+                    <li className="inline-flex items-center"><a href="#" className="inline-flex items-center text-md font-medium text-gray-700 hover:text-blue-600">Home</a></li>
                     <li>
-                        <div class="flex items-center">/<a href="#" class="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Projects</a></div>
+                        <div className="flex items-center">/<a href="#" className="ms-1 text-md font-medium text-gray-700 hover:text-blue-600 md:ms-2">Projects</a></div>
                     </li>
                     <li aria-current="page">
-                        <div class="flex items-center">/<span class="ms-1 text-md font-medium text-gray-500 md:ms-2">
+                        <div className="flex items-center">/<span className="ms-1 text-md font-medium text-gray-500 md:ms-2">
                             view
                         </span></div>
                     </li>
@@ -144,11 +144,11 @@ export default function ViewProjects() {
             </nav>
             <div className="w-[95%] border mt-8 border-slate-400 rounded-t-md  mx-auto">
                 <div className=' bg-slate-100 flex justify-between py-3 px-4 rounded-t-md border border-slate-400'>
-                    <h3 class="text-[26px] font-semibold  bg-slate-100 rounded-t-md ">
+                    <h3 className="text-[26px] font-semibold  bg-slate-100 rounded-t-md ">
                         View Projects </h3>
                     <div>
-                        <button onClick={changestatushandler} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">change status</button>
-                        <button onClick={deleteHandler} type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">delete all </button>
+                        <button onClick={changestatushandler} type="button" className="text-white capitalize bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">change status</button>
+                        <button onClick={deleteHandler} type="button" className="text-white capitalize bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">delete all </button>
                     </div>
                 </div>
 
@@ -180,7 +180,7 @@ export default function ViewProjects() {
                             {
                                 ProjectData.map((v, i) => {
                                     return (
-                                        <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
+                                        <tr key={i} className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">
                                             <td className="w-4 p-4">
                                                 <div className="flex items-center">
                                                     <input
@@ -238,74 +238,118 @@ export default function ViewProjects() {
 function DetailPopUpComp({ baseurl, DetailPopUp, project, setdetailpopup }) {
     return (
         <>
-            <div id="order-modal" className={` ${DetailPopUp ? '' : 'hidden'} fixed inset-0 z-50 flex justify-center items-center  bg-opacity-40`} style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}>
-                <div className="relative bg-white rounded-lg shadow-lg w-[95%] max-w-6xl max-h-[90vh] overflow-y-auto" >
-                    <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t sticky top-0 bg-white z-10">
-                        <h3 className="text-xl font-semibold text-gray-900">Project Details</h3>
-                        <button
-                            type="button"
-                            onClick={() => setdetailpopup(false)}
-                            className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
-                        >
-                            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                            <span className="sr-only">Close modal</span>
-                        </button>
-                    </div>
+            <div
+        id="order-modal"
+        className={`${
+          DetailPopUp ? '' : 'hidden'
+        } fixed inset-0 z-50 flex justify-center items-center bg-opacity-40`}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
+      >
+        <div className="relative bg-white rounded-lg shadow-lg w-[95%] max-w-6xl max-h-[90vh] overflow-y-auto">
+          <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t sticky top-0 bg-white z-10">
+            <h3 className="text-xl font-semibold text-gray-900">Project Details</h3>
+            <button
+              type="button"
+              onClick={() => setdetailpopup(false)}
+              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center"
+            >
+              <svg
+                className="w-5 h-5"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span className="sr-only">Close modal</span>
+            </button>
+          </div>
 
-                    <div className="p-6 space-y-6">
-                        <div className="grid md:grid-cols-[60%_40%] grid-cols-1 gap-8">
-                            {/* 🖼️ Images Block */}
-                            <div className="flex flex-wrap gap-4 border rounded-md shadow-md p-4 justify-start items-start">
-                                {project?.images?.length > 0 ? (
-                                    project.images.map((v, i) => (
-                                        <img
-                                            key={i}
-                                            src={`${baseurl}/${v.image}`}
-                                            alt="project"
-                                            className="h-40 object-cover rounded border"
-                                        />
-                                    ))
-                                ) : (
-                                    <p className="text-gray-500">No images available</p>
-                                )}
-                            </div>
-
-                            {/* 📋 Project Details */}
-                            <div className="border rounded-md shadow-md p-4">
-                                <h3 className="text-center font-semibold text-lg mb-4">Project Info</h3>
-                                <ul className="space-y-3 text-[15px]">
-                                    <li><strong>Name:</strong> {project?.name}</li>
-                                    <li><strong>Type:</strong> {project?.project_type}</li>
-                                    <li><strong>Status:</strong> {project?.status ? 'Active' : 'Inactive'}</li>
-                                    <li><strong>Order:</strong> {project?.order}</li>
-                                    <li><strong>Short Description:</strong><br />{project?.short_description}</li>
-                                    <li><strong>Long Description:</strong><br />{project?.long_description}</li>
-                                    <li><strong>Features:</strong>
-                                        <ul className="list-disc ml-5">
-                                            {project?.features?.map((f, i) => <li key={i}>{f}</li>)}
-                                        </ul>
-                                    </li>
-                                    <li><strong>Tech Stack:</strong>
-                                        <ul className="list-disc ml-5">
-                                            {project?.tech_stack?.map((tech, i) => (
-                                                <li key={i}>{typeof tech === 'object' ? tech.name : tech}</li>
-                                            ))}
-                                        </ul>
-                                    </li>
-                                    <li><strong>Paragraphs:</strong>
-                                        <ul className="list-disc ml-5">
-                                            {project?.paragraphs?.map((p, i) => <li key={i}>{p}</li>)}
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+          <div className="p-6 space-y-6">
+            {/* ✅ FLEX layout instead of grid */}
+            <div className="flex flex-col md:flex-row gap-8">
+              {/* 🖼️ Images Block */}
+              <div className="w-full md:w-[60%] border rounded-md shadow-md p-4">
+                <div className="flex flex-wrap gap-4">
+                  {project?.images?.length > 0 ? (
+                    project.images.map((v, i) => (
+                      <div key={i} className="w-[48%] border rounded">
+                        <img
+                          src={`${baseurl}/${v.image}`}
+                          alt="project"
+                          className="w-full h-auto object-contain block"
+                        />
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-gray-500 text-center w-full">No images available</p>
+                  )}
                 </div>
-            </div>
+              </div>
 
+              {/* 📋 Project Details */}
+              <div className="w-full md:w-[40%] border rounded-md shadow-md p-4">
+                <h3 className="text-center font-semibold text-lg mb-4">Project Info</h3>
+                <ul className="space-y-3 text-[15px]">
+                  <li>
+                    <strong>Name:</strong> {project?.name}
+                  </li>
+                  <li>
+                    <strong>Type:</strong> {project?.project_type}
+                  </li>
+                  <li>
+                    <strong>Status:</strong> {project?.status ? 'Active' : 'Inactive'}
+                  </li>
+                  <li>
+                    <strong>Order:</strong> {project?.order}
+                  </li>
+                  <li>
+                    <strong>Short Description:</strong>
+                    <br />
+                    {project?.short_description}
+                  </li>
+                  <li>
+                    <strong>Long Description:</strong>
+                    <br />
+                    {project?.long_description}
+                  </li>
+                  <li>
+                    <strong>Features:</strong>
+                    <ul className="list-disc ml-5">
+                      {project?.features?.map((f, i) => (
+                        <li key={i}>{f}</li>
+                      ))}
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Tech Stack:</strong>
+                    <ul className="list-disc ml-5">
+                      {project?.tech_stack?.map((tech, i) => (
+                        <li key={i}>{typeof tech === 'object' ? tech.name : tech}</li>
+                      ))}
+                    </ul>
+                  </li>
+                  <li>
+                    <strong>Paragraphs:</strong>
+                    <ul className="list-disc ml-5">
+                      {project?.paragraphs?.map((p, i) => (
+                        <li key={i}>{p}</li>
+                      ))}
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
         </>
     )
 }

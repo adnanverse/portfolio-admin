@@ -54,6 +54,7 @@ export default function AdminCredentials() {
                     Email
                 </label>
                 <input
+                autoComplete='off'
                     name="email"
                     defaultValue={admindetail.email}
                     type="email"
@@ -72,6 +73,7 @@ export default function AdminCredentials() {
                     New Password
                 </label>
                 <input
+                autoComplete='off'
                     name="password"
                     type="password"
                     id="new_password"
@@ -86,6 +88,7 @@ export default function AdminCredentials() {
                     Confirm Password
                 </label>
                 <input
+                autoComplete='off'
                     name="confirm_password"
                     type="password"
                     id="confirm_password"
