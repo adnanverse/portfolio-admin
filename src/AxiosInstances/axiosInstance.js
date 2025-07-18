@@ -1,7 +1,6 @@
 import axios from "axios";
 const instance = axios.create({
-    baseURL: 'http://localhost:4000/'
-    // import.meta.env.VITE_API_BASE_URL
+    baseURL:  import.meta.env.VITE_API_BASE_URL
 })
 
 // ✅ Interceptor lagate hain: ye har request se pehle chalega
