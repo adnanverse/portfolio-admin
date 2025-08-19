@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import { CommonContext } from './context/Context'
 
 export default function Login() {
-    let {setislogin} = useContext(CommonContext)
+    let { setislogin, setrender, render } = useContext(CommonContext)
     let navigation = useNavigate()
 
     let handlesubmission = (event) => {
@@ -17,6 +17,7 @@ export default function Login() {
                     localStorage.setItem('token', response.data.token)
                     setislogin(true)
                     toast.success('login successfully')
+                    setrender(!render)
                     navigation('/user-management/website-profile')
 
                 } else {
@@ -41,12 +42,12 @@ export default function Login() {
                             <form className="mt-6" onSubmit={handlesubmission} method="POST">
                                 <div>
                                     <label className="block text-gray-700">Email Address</label>
-                                    <input autoComplete="off" type="email" name="email" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autoFocus  required />
+                                    <input autoComplete="off" type="email" name="email" placeholder="Enter Email Address" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none" autoFocus required />
                                 </div>
 
                                 <div className="mt-4">
                                     <label className="block text-gray-700">Password</label>
-                                    <input type="password" autoComplete="off" name="password"  placeholder="Enter Password" minLength="3" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
+                                    <input type="password" autoComplete="off" name="password" placeholder="Enter Password" minLength="3" className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500
                   focus:bg-white focus:outline-none" required />
                                 </div>
 
